@@ -33,10 +33,10 @@ public class VideoPreloadManager: NSObject {
         
         let url = waitingQueue.removeFirst()
         
-        guard
-            !VideoLoadManager.shared.loaderMap.keys.contains(url),
+        guard !VideoLoadManager.shared.loaderMap.keys.contains(url),
             let cacheHandler = try? VideoCacheHandler(url: url) else {
-            return
+                start()
+                return
         }
         
         downloader = VideoDownloader(url: url, cacheHandler: cacheHandler)
